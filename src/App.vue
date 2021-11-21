@@ -1,30 +1,70 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <the-header></the-header>
+    <transition name="route" mode="out-in">
+      <router-view></router-view>
+    </transition>
   </div>
-  <router-view />
 </template>
 
+<script>
+import TheHeader from "./components/nav/TheHeader.vue";
+
+export default {
+  components: {
+    TheHeader,
+  },
+  computed: {
+    didAutoLogout() {
+      return this.$store.didAutoLogout;
+    },
+  },
+  created() {
+    this.$store.dispatch("autoLogin");
+  },
+  watch: {
+    didAutoLogout(curValue, oldValue) {
+      if (curValue && curValue !== oldValue) {
+        this.$router.replace("/foods");
+      }
+    },
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
+* {
+  box-sizing: border-box;
 }
 
-#nav {
-  padding: 30px;
+html {
+  font-family: sans-serif;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+body {
+  margin: 0;
+  background: orange;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.route-leave-from,
+.route-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+.route-leave-active {
+  transition: all 0.3s ease-in;
+}
+.route-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.route-enter-from {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.route-enter-active {
+  transition: all 0.3s ease-out;
 }
 </style>
