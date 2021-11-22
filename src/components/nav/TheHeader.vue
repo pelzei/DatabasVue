@@ -6,7 +6,7 @@
     <nav>
       <ul>
         <li>
-          <router-link to="/foods">Produkter</router-link>
+          <router-link to="/products">Produkter</router-link>
         </li>
         <li>
           <router-link to="/cart">Korgen</router-link>

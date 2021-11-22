@@ -48,7 +48,7 @@ export default {
   },
   created() {
     this.selectedFood = this.$store.getters["food/products"].find(
-      (product) => product._id == this.id
+      (product) => product.id == this.id
     );
     console.log(this.$store.getters["food/products"]);
     console.log(this.selectedFood);
