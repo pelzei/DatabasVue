@@ -8,10 +8,7 @@
         <li>
           <router-link to="/products">Produkter</router-link>
         </li>
-        <li>
-          <router-link to="/cart">Korgen</router-link>
-          <base-badge mode="elegant">{{ cartQuantity }}</base-badge>
-        </li>
+        
         <li v-if="isLoggedIn">
           <router-link to="/profil">Din profil</router-link>
         </li>

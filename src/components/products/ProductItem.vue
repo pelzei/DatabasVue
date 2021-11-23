@@ -12,7 +12,6 @@
             <base-button class="outline" link :to="productDetailsLink">
               <h4>Läs mer</h4>
             </base-button>
-            <base-button @click="addToCart">Lägg till 1 portion </base-button>
           </div>
         </div>
       </div>

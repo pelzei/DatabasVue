@@ -1,14 +1,7 @@
 <template>
   <div>
-    <base-dialog
-      :show="!!error"
-      title="Oj, det blev fel 🤷🏻‍♂️"
-      @close="handleError"
-    >
-      <p>{{ error }}</p>
-    </base-dialog>
-    <base-dialog fixed :show="isLoading" title="Autentiserar ..."></base-dialog>
-    <base-card>
+   
+       <base-card>
       <form @submit.prevent="submitForm">
         <div class="form-control">
           <label for="name">Produktnamn:</label>
@@ -52,27 +45,9 @@ export default {
       price: null,
       categoryName: null,
       formIsValid: true,
-      mode: "login",
-      isLoading: false,
-      error: null,
     };
   },
-  computed: {
-    submitButtonCaption() {
-      if (this.mode === "login") {
-        return "Logga in";
-      } else {
-        return "Skapa konto";
-      }
-    },
-    switchModeButtonCaption() {
-      if (this.mode === "login") {
-        return "Skapa konto istället";
-      } else {
-        return "Logga in istället";
-      }
-    },
-  },
+  
   methods: {
     async submitForm() {
       
@@ -91,16 +66,7 @@ export default {
       
       }
     },
-    switchAuthMode() {
-      if (this.mode === "signup") {
-        this.mode = "login";
-      } else {
-        this.mode = "signup";
-      }
-    },
-    handleError() {
-      this.error = null;
-    },
+    
   };
 
 </script>

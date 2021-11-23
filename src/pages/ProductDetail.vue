@@ -16,7 +16,7 @@
             <base-button class="outline" link to="/products"
               >Tillbaka till menyn</base-button
             >
-            <base-button @click="addToCart">Lägg till 1 portion</base-button>
+            
           </div>
         </div>
       </div>
@@ -53,13 +53,7 @@ export default {
     console.log(this.$store.getters["food/products"]);
     console.log(this.selectedFood);
   },
-  methods: {
-    addToCart() {
-      this.$store.dispatch("cart/addToCart", {
-        id: this.id,
-      });
-    },
-  },
+  
 };
 </script>
 
