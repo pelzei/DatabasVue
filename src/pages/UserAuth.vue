@@ -11,21 +11,32 @@
     <base-card>
       <form @submit.prevent="submitForm">
         <div class="form-control">
-          <label for="email">E-postadress:</label>
-          <input type="email" id="email" v-model.trim="email" />
+          <label for="name">Produktnamn:</label>
+          <input type="text" id="name" v-model.trim="name" />
         </div>
         <div class="form-control">
-          <label for="password">Lösenord:</label>
-          <input type="password" id="password" v-model.trim="password" />
+          <label for="shortDescription">Kort beskrivning:</label>
+          <input type="text" id="shortDescription" v-model.trim="shortDescription" />
+        </div>
+        <div class="form-control">
+          <label for="longDescription">Lång beskrivning:</label>
+          <textarea id="longDescription" v-model.trim="longDescription" />
+        </div>
+        <div class="form-control">
+          <label for="price">Pris:</label>
+          <input type="number" id="price" v-model.number="price" />
+        </div>
+        <div class="form-control">
+          <label for="category">Produktkategori:</label>
+          <select id="categoryName" v-model="categoryName">
+        <option value="1">Nyhetsbrev</option>
+        <option value="2">Tidskrift</option>
+      </select>
         </div>
         <p v-if="!formIsValid" class="errors">
-          Vänligen ange en giltig e-postadress samt ett lösenord på minst 6
-          tecken
+          Vänligen fyll i formuläret korrekt!
         </p>
-        <base-button>{{ submitButtonCaption }}</base-button>
-        <base-button type="button" mode="flat" @click="switchAuthMode">{{
-          switchModeButtonCaption
-        }}</base-button>
+        <base-button>Skicka in till databasen</base-button>
       </form>
     </base-card>
   </div>
@@ -35,8 +46,11 @@
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      name: "",
+      shortDescription: "",
+      longDescription: "",
+      price: null,
+      categoryName: null,
       formIsValid: true,
       mode: "login",
       isLoading: false,
@@ -61,29 +75,20 @@ export default {
   },
   methods: {
     async submitForm() {
-      if (
-        this.email === "" ||
-        !this.email.includes("@") ||
-        this.password.length < 6
-      ) {
-        this.formIsValid === false;
-        return;
-      }
-
-      const authPayload = {
-        email: this.email,
-        password: this.password,
+      
+      const newProduct = {
+        Name: this.name,
+        ShortDescription: this.shortDescription,
+        LongDescription: this.longDescription,
+        Price: this.price,
+        CategoryNameId: this.categoryName 
       };
 
-      try {
-        if (this.mode === "login") {
-          await this.$store.dispatch("login", authPayload);
-        } else {
-          await this.$store.dispatch("signup", authPayload);
-        }
-        this.$router.replace("/foods");
-      } catch (err) {
-        this.error = err.message || "Autentiseringen misslyckades";
+      console.log(newProduct);
+
+      this.$store.dispatch("food/addProduct", newProduct);
+        this.$router.replace("/products");
+      
       }
     },
     switchAuthMode() {
@@ -96,8 +101,8 @@ export default {
     handleError() {
       this.error = null;
     },
-  },
-};
+  };
+
 </script>
 
 <style scoped>

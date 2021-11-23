@@ -13,7 +13,7 @@
           <h5>{{ short }}</h5>
           <p>{{ desc }}</p>
           <div class="product__actions">
-            <base-button class="outline" link to="/foods"
+            <base-button class="outline" link to="/products"
               >Tillbaka till menyn</base-button
             >
             <base-button @click="addToCart">Lägg till 1 portion</base-button>

@@ -19,7 +19,7 @@
     </nav>
     <div>
       <button v-if="!isLoggedIn">
-        <router-link to="/auth">Logga in</router-link>
+        <router-link to="/auth">Lägg till produkt</router-link>
       </button>
       <button v-if="isLoggedIn" @click="logout">Logga ut</button>
     </div>
